@@ -19,6 +19,8 @@
 			<property name="hibernate.format_sql" value="true"/>
 			<!-- SQL 출력 시 주석 출력 -->
 			<property name="hibernate.use_sql_comments" value="true"/>
+			<!-- 이 사이즈만큼 모아서 한 번에 처리 (버퍼링 비슷) -->
+			<property name="hibernate.jdbc.batch_size" value="10"/>
 			<!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
 		</properties>
 	</persistence-unit>

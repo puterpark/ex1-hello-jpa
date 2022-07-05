@@ -19,26 +19,26 @@ public class JpaMain {
 		tx.begin();
 
 		try {
-			// 회원 등록
+			/* 회원 등록 */
 //			Member member = new Member();
 //			member.setId(2L);
 //			member.setName("HelloB");
 //			em.persist(member);
 
-			// 회원 조회
+			/* 회원 조회 */
 //			Member findMember = em.find(Member.class, 1L);
 //			System.out.println("findMember.id = " + findMember.getId());
 //			System.out.println("findMember.name = " + findMember.getName());
 
-			// 회원 삭제
+			/* 회원 삭제 */
 //			Member findMember = em.find(Member.class, 1L);
 //			em.remove(findMember);
 
-			// 회원 수정
+			/* 회원 수정 */
 //			Member findMember = em.find(Member.class, 1L);
 //			findMember.setName("helloJPA"); // List처럼 set만 해도 수정됨
 
-			// JPQL
+			/* JPQL */
 //			List<Member> result = em.createQuery("select m from Member as m", Member.class)
 //					.setFirstResult(0)
 //					.setMaxResults(5)
@@ -49,19 +49,41 @@ public class JpaMain {
 //			}
 			
 			/* 영속성 컨텍스트 */
-			
 			// 비영속
-			Member member = new Member();
-			member.setId(100L);
-			member.setName("HelloJPA");
-			
-			// 영속
-			em.persist(member); // 이때 DB에 저장이 되는 것이 아님
+//			Member member = new Member();
+//			member.setId(100L);
+//			member.setName("HelloJPA");
+//
+//			// 영속
+//			em.persist(member); // 이때 DB에 저장이 되는 것이 아님, 1차 캐시에 저장됨
+//
+//			Member findMember = em.find(Member.class, 100L);
+//			System.out.println("findMember.id = " + findMember.getId());
+//			System.out.println("findMember.name = " + findMember.getName());
 
-			// 준영속
-			em.detach(member); // 영속성 컨텍스트에서 분리
+			/* 영속 엔티티의 동일성 보장 */
+//			Member findMember1 = em.find(Member.class, 100L); // DB에서 조회됨
+//			Member findMember2 = em.find(Member.class, 100L); // 1차 캐시에서 조회됨
+//
+//			System.out.println("result = " + (findMember1 == findMember2));
 
-			tx.commit(); // 이때 쿼리가 날아감
+			/* 트랜잭션을 지원하는 쓰기 지연 */
+//			Member member1 = new Member(150L, "A");
+//			Member member2 = new Member(160L, "B");
+//
+//			// 쓰기 지연 SQL 저장소에 저장
+//			em.persist(member1);
+//			em.persist(member2);
+
+			/* 변경 감지 */
+//			Member member = em.find(Member.class, 150L);
+//			member.setName("ZZZZZ");
+
+			/* 엔티티 삭제 */
+			Member member = em.find(Member.class, 22L);
+			em.remove(member); // 엔티티 삭제
+
+			tx.commit(); // 이때 쿼리가 날아감 (flush, commit)
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
