@@ -80,8 +80,15 @@ public class JpaMain {
 //			member.setName("ZZZZZ");
 
 			/* 엔티티 삭제 */
-			Member member = em.find(Member.class, 22L);
-			em.remove(member); // 엔티티 삭제
+//			Member member = em.find(Member.class, 22L);
+//			em.remove(member); // 엔티티 삭제
+
+			/* 플러시 */
+			Member member = new Member(200L, "member200");
+			em.persist(member);
+			em.flush(); // 플러시 직접 호출
+
+			System.out.println("=====");
 
 			tx.commit(); // 이때 쿼리가 날아감 (flush, commit)
 		} catch (Exception e) {
