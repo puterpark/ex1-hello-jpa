@@ -94,9 +94,8 @@ em.remove(member);
 
 ### 영속성 컨텍스트 2
 
-#### 인티티 조회 : 1차 캐시
-> 영속성 컨텍스트 안에 있는 데이터를 먼저 조회하고,   
-> 없으면 DB에서 조회해서 1차 캐시에 저장
+#### 엔티티 조회 : 1차 캐시
+> 영속성 컨텍스트 안에 있는 데이터를 먼저 조회하고, 없으면 DB에서 조회해서 1차 캐시에 저장
 
 #### 영속 엔티티의 동일성 보장
 > 1차 캐시로 반복 가능한 읽기(REPEATABLE READ) 등급의 트랜잭션 격리 수준을 데이터베이스가 아닌 애플리케이션 차원에서 제공
@@ -127,7 +126,7 @@ INSERT SQL을 생성하여 `쓰기 지연 SQL 저장소`에도 저장한다.
 
 tx.commit() 시에 INSERT SQL이 `flush`와 `commit`이 된다.
 
-### 엔티티 수정 : 변경 감지
+#### 엔티티 수정 : 변경 감지
 ```java
 Member member = em.find(Member.class, 150L);
 member.setName("ZZZZZ"); // 회원 이름 수정
@@ -137,10 +136,10 @@ member.setName("ZZZZZ"); // 회원 이름 수정
 3. UPDATE SQL 생성 후 `쓰기 지연 SQL 저장소`에 저장한다.
 4. UPDATE SQL이 `flush`와 `commit`이 된다.
 
-### 엔티티 삭제
+#### 엔티티 삭제
 ```java
 //삭제 대상 엔티티 조회
-Member memberA = em.find(Member.class, “memberA");
-em.remove(memberA); // 엔티티 삭제
+Member member = em.find(Member.class, 22L);
+em.remove(member); // 엔티티 삭제
 ```
 
