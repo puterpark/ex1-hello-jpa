@@ -39,16 +39,29 @@ public class JpaMain {
 //			findMember.setName("helloJPA"); // List처럼 set만 해도 수정됨
 
 			// JPQL
-			List<Member> result = em.createQuery("select m from Member as m", Member.class)
-					.setFirstResult(0)
-					.setMaxResults(5)
-					.getResultList();
+//			List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//					.setFirstResult(0)
+//					.setMaxResults(5)
+//					.getResultList();
+//
+//			for (Member member : result) {
+//				System.out.println("member.name = " + member.getName());
+//			}
+			
+			/* 영속성 컨텍스트 */
+			
+			// 비영속
+			Member member = new Member();
+			member.setId(100L);
+			member.setName("HelloJPA");
+			
+			// 영속
+			em.persist(member); // 이때 DB에 저장이 되는 것이 아님
 
-			for (Member member : result) {
-				System.out.println("member.name = " + member.getName());
-			}
+			// 준영속
+			em.detach(member); // 영속성 컨텍스트에서 분리
 
-			tx.commit();
+			tx.commit(); // 이때 쿼리가 날아감
 		} catch (Exception e) {
 			tx.rollback();
 		} finally {
