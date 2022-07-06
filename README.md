@@ -218,13 +218,26 @@ JPA를 사용해서 테이블과 매핑할 클래스는 **@Entity** 필수
 * 생성된 DDL은 운영서버에서는 사용하지 않거나 적절히 다듬은 후 사용
 
 #### 속성
-
 `hibernate.hbm2ddl.auto`
 
-| 옵션 | 설명 |
-|---|----|
-|create|기존테이블 삭제 후 다시 생성 (DROP + CREATE)|
-|create-drop|create와 같으나 종료 시점에 테이블 DROP|
-|update|변경내용만 반영(운영DB 사용금지)|
-|validate|엔티티와 테이블이 정상 매핑되었는지만 확인|
-|none|사용하지 않음|
+|옵션|설명|
+|---|---|
+|`create`|기존테이블 삭제 후 다시 생성 (DROP + CREATE)|
+|`create-drop`|create와 같으나 종료 시점에 테이블 DROP|
+|`update`|변경내용만 반영(운영DB 사용금지), ALTER<br/>삭제는 안됨|
+|`validate`|엔티티와 테이블이 정상 매핑되었는지만 확인|
+|`none`|사용하지 않음|
+
+#### 주의점
+> **운영 장비에는 절대 `create`, `create-drop`, `update`를 사용하면 안됨**
+
+개발 초기 단계 : `create` 또는 `update`  
+테스트 서버 : `update` 또는 `validate`  
+스테이징 & 운영 서버 : `validate` 또는 `none`
+
+#### DDL 생성 기능
+`@Column(nullable = false, length = 10)`  
+제약 조건 추가 : 회원 이름은 **필수(NULL불가)**, 10자 초과 불가
+
+> DDL을 자동 생성할 때만 사용되고 JPA의 실행 로직에는 영향을 주지 않는다.
+
