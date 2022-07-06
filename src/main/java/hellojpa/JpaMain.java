@@ -84,11 +84,20 @@ public class JpaMain {
 //			em.remove(member); // 엔티티 삭제
 
 			/* 플러시 */
-			Member member = new Member(200L, "member200");
-			em.persist(member);
-			em.flush(); // 플러시 직접 호출
+//			Member member = new Member(200L, "member200");
+//			em.persist(member);
+//			em.flush(); // 플러시 직접 호출
+//
+//			System.out.println("=====");
 
-			System.out.println("=====");
+			/* 준영속 상태 */
+			Member member = em.find(Member.class, 150L);
+			member.setName("AAAAA");
+			
+//			em.detach(member); // 준영속 상태로 전환 (수정되지 않음)
+			em.clear(); // 통채로 초기화, 1차 캐시도 사라짐
+
+			Member member2 = em.find(Member.class, 150L);
 
 			tx.commit(); // 이때 쿼리가 날아감 (flush, commit)
 		} catch (Exception e) {
