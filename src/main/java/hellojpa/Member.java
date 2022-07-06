@@ -3,7 +3,7 @@ package hellojpa;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity // JPA가 관리할 객체
+@Entity(name = "MBR") // JPA가 관리할 객체
 public class Member {
 
 	@Id // 데이터베이스 PK와 매핑
