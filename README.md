@@ -241,3 +241,35 @@ JPA를 사용해서 테이블과 매핑할 클래스는 **@Entity** 필수
 
 > DDL을 자동 생성할 때만 사용되고 JPA의 실행 로직에는 영향을 주지 않는다.
 
+
+### 필드와 컬럼 매핑
+
+#### @Column
+> 컬럼 매핑
+
+
+#### @Enumerated
+> enum 타입 매핑
+
+
+#### @Temporal
+> 날짜 타입(java.util.Date, java.util.Calendar) 매핑
+
+
+#### @Lob
+> BLOB, CLOB 매핑
+
+
+#### @Transient
+> 특정 필드를 컬럼에 매핑하지 않음 (매핑 무시)
+
+
+
+
+
+
+
+
+
+
+

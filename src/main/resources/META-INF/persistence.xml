@@ -22,7 +22,7 @@
 			<!-- 이 사이즈만큼 모아서 한 번에 처리 (버퍼링 비슷) -->
 			<property name="hibernate.jdbc.batch_size" value="10"/>
 			<!-- 스키마 자동 생성 -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create"/>
 		</properties>
 	</persistence-unit>
 </persistence>
